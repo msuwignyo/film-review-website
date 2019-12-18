@@ -14,6 +14,27 @@ module.exports = (sequelize, DataTypes) => {
     get status() {
       return this.status;
     }
+
+    static filmStatistics(filmId) {
+      const out = {};
+
+      // cari semua user yg like film tersebut
+      return UserLikesFilm.findAll({
+        where: { FilmId: filmId, status: true }
+      }).then((userLikes) => {
+        out.totalLikes = userLikes.length;
+
+        // cari semua user yg dislike film tersebut
+        return UserLikesFilm.findAll({
+          where: { FilmId: filmId, status: true }
+        })
+      }).then((userDislikes) => {
+        out.totalDislikes = userDislikes.length;
+        out.totalUsersReacted = out.totalLikes + out.totalDislikes;
+
+        return out;
+      });
+    }
   }
 
   UserLikesFilm.init({

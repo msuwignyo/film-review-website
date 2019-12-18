@@ -6,6 +6,18 @@ const UserLikesFilm = require('../models').UserLikesFilm;
 const View = require('../views/view');
 
 class FilmController {
+  /**
+   * Contoh output:
+   * {
+   *    id: 2,
+   *    name: 'Skyfall',
+   *    psoter: null,
+   *    description: 'lorem ipsum'
+   *    trailer: 'www.loremipsum.com'
+   * }
+   * 
+   * @param {object} nextFilm 
+   */
   static addFilm(nextFilm) {
     const out = {};
 
@@ -24,34 +36,37 @@ class FilmController {
       .catch((err) => View.error(err));
   }
 
+  /**
+   * Contoh output:
+   * {
+   *    id: 2,
+   *    name: 'Skyfall',
+   *    psoter: null,
+   *    description: 'lorem ipsum'
+   *    trailer: 'www.loremipsum.com'
+   *    stats: { totalLikes: 1, totalDislikes 1, totalUserReacted: 2 }
+   * }
+   * 
+   * @param {integer} filmId
+   */
   static showOneFilm(filmId) {
     const out = {};
 
     // cari film berdasarkan film ID
     Film.findByPk(filmId, { include: [User] })
       .then((film) => {
+        if (film === null) throw 'ID FILM TIDAK ADA';
         out.id = film.id;
         out.name = film.name;
         out.poster = film.poster;
         out.description = film.description;
         out.trailer = film.trailer;
-        out.totalUsers = film.dataValues.Users.length;
 
-        // cari siapa yang like film tersebut
-        return UserLikesFilm.findAll({
-          where: { FilmId: filmId, status: true }
-        });
+        // cari data statistik-nya:
+        return UserLikesFilm.filmStatistics(filmId);
       })
-      .then((userLikes) => {
-        out.totalLikes = userLikes.length;
-
-        // cari siapa yang dislike film tersebut
-        return UserLikesFilm.findAll({
-          where: { FilmId: filmId, status: false }
-        });
-      })
-      .then((userDislikes) => {
-        out.totalDisLikes = userDislikes.length;
+      .then((stats) => {
+        out.stats = stats;
 
         // terminal view
         View.success(out);
@@ -104,14 +119,18 @@ class FilmController {
   }
 
   static deleteFilm(filmId) {
-    // hapus relasi di conjungtion table
+    // hapus relasi di conjunction table
     UserLikesFilm.destroy({ where: { FilmId: filmId } })
       .then(() => {
 
         // baru hapus film-nya
         return Film.destroy({ where: { id: filmId } })
       })
-      .then(() => View.success('Delete operation done...'))
+      .then(() => {
+
+        // terminal view
+        View.success('Delete operation done...')
+      })
       .catch((err) => View.error(err));
   }
 }

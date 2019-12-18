@@ -5,7 +5,7 @@ class View {
   }
 
   static error(err) {
-    console.log('SUCCESS -------');
+    console.log('ERROR -------');
     console.log(err);
   }
 }
