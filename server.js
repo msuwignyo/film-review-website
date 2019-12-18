@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const Admin = require('./router/').Admin
+const Admin = require('./router').Admin
 app.use(express.urlencoded({ extended: true }))
 
 app.set('view engine', 'ejs');

@@ -23,8 +23,35 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init({
     name: DataTypes.STRING,
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      validate: {
+        isUnique(values) {
+          return User.findOne({ where: { username: values } })
+            .then(data => {
+              if (data) {
+                throw new Error('Email Has Already Registred')
+              }
+            })
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          msg: "Email Formated Wrong"
+        },
+        isUnique(values) {
+          return User.findOne({ where: { email: values } })
+            .then(data => {
+              if (data) {
+                throw new Error('Email Has Already Registred')
+              }
+            })
+        }
+      }
+    },
     password: DataTypes.STRING,
     role: DataTypes.STRING
   }, {
