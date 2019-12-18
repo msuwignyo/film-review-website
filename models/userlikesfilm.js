@@ -2,7 +2,19 @@
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
 
-  class UserLikesFilm extends Model { }
+  class UserLikesFilm extends Model {
+    get UserId() {
+      return this.UserId;
+    }
+
+    get FilmId() {
+      return this.FilmId;
+    }
+
+    get status() {
+      return this.status;
+    }
+  }
 
   UserLikesFilm.init({
     UserId: DataTypes.INTEGER,

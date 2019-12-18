@@ -2,7 +2,23 @@
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
 
-  class User extends Model { };
+  class User extends Model {
+    get name() {
+      return this.name;
+    }
+
+    get username() {
+      return this.username;
+    }
+
+    get email() {
+      return this.email;
+    }
+
+    get role() {
+      return this.role;
+    }
+  };
 
   User.init({
     name: DataTypes.STRING,

@@ -4,19 +4,23 @@ module.exports = (sequelize, DataTypes) => {
 
   class Film extends Model {
     get name() {
-      this.name;
+      return this.name;
     }
 
     get poster() {
-      this.poster;
+      return this.poster;
     }
 
     get description() {
-      this.description;
+      return this.description;
     }
 
     get trailer() {
-      this.trailer;
+      return this.trailer;
+    }
+
+    static filmRating() {
+      return 0;
     }
   }
 
