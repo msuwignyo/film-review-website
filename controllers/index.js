@@ -2,7 +2,7 @@ const UserController = require('./userController');
 const FilmController = require('./filmController');
 const UserLikesFilmController = require('./userLikesFilmController');
 
-module.export = {
+module.exports = {
   UserController,
   FilmController,
   UserLikesFilmController
