@@ -1,12 +1,19 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const UserLikesFilm = sequelize.define('UserLikesFilm', {
+  const Model = sequelize.Sequelize.Model;
+
+  class UserLikesFilm extends Model { }
+
+  UserLikesFilm.init({
     UserId: DataTypes.INTEGER,
     FilmId: DataTypes.INTEGER,
     status: DataTypes.BOOLEAN
-  }, {});
-  UserLikesFilm.associate = function(models) {
-    // associations can be defined here
+  }, { sequelize });
+
+  UserLikesFilm.associate = (models) => {
+    UserLikesFilm.belongsTo(models.User, { foreignKey: 'UserId' });
+    UserLikesFilm.belongsTo(models.Film, { foreignKey: 'FilmId' });
   };
+
   return UserLikesFilm;
 };

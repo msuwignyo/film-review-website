@@ -1,13 +1,35 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Film = sequelize.define('Film', {
+  const Model = sequelize.Sequelize.Model;
+
+  class Film extends Model {
+    get name() {
+      this.name;
+    }
+
+    get poster() {
+      this.poster;
+    }
+
+    get description() {
+      this.description;
+    }
+
+    get trailer() {
+      this.trailer;
+    }
+  }
+
+  Film.init({
     name: DataTypes.STRING,
     poster: DataTypes.STRING,
     description: DataTypes.STRING,
     trailer: DataTypes.STRING
-  }, {});
-  Film.associate = function(models) {
-    // associations can be defined here
+  }, { sequelize });
+
+  Film.associate = (models) => {
+    Film.belongsToMany(models.User, { through: models.UserLikesFilm });
   };
+
   return Film;
 };
