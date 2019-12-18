@@ -2,6 +2,22 @@
 
 Ini adalah pair-project saya dengan Bayu Oktari dengan judul "Film Review Website".
 
+## Tugas 17 Desember 2019
+
+**Markus**
+- Setup database
+
+**Bayu**
+- Buat wireframe
+
+## Tugas 18 Desember 2019
+
+**Markus**
+- Seed data
+
+**Bayu**
+- Admin Control -- (userController)
+
 ## Driver Code
 
 Driver code ini untuk menguji controller yang kami buat. Berikut ini daftar lengkapnya:
