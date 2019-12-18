@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card-login{
+    width: 400px;
+    margin-top: 50px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}

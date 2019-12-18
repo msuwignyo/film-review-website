@@ -1,4 +1,5 @@
 'use strict';
+const hashPassword = require('../helper/hashPassword')
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
 
@@ -26,7 +27,13 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.STRING
-  }, { sequelize });
+  }, {
+    hooks: {
+      beforeCreate: (instance, option) => {
+        instance.password = hashPassword(instance.password)
+      }
+    }, sequelize
+  });
 
   User.associate = (models) => {
     User.belongsToMany(models.Film, { through: models.UserLikesFilm });
