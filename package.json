@@ -1,0 +1,27 @@
+{
+  "name": "film-review-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m4rk00s/film-review-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m4rk00s/film-review-website/issues"
+  },
+  "homepage": "https://github.com/m4rk00s/film-review-website#readme",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "pg": "^7.15.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.3"
+  }
+}
