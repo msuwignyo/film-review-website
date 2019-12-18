@@ -41,6 +41,8 @@ node admin.js user:delete 3
 
 ### CRUD Film
 
+Hanya bisa diakses oleh admin
+
 **Create**
 
 ```bash
