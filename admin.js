@@ -42,4 +42,5 @@ const FilmController = require('./controllers/index').FilmController
 
 /* DELETE FILM -------------------------------------------------------------- */
 
-FilmController.deleteFilm(1);
+// FilmController.deleteFilm(1);
+// FilmController.showOneFilm(1); // <- bakal keluar error

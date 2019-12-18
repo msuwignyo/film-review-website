@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Movie Review</title>
+  <!-- <link rel="stylesheet" href="./css/homepage.css"> -->
+  <style>
+    body {
+      width: 720px
+    }
+
+    .container {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 100px auto 100px;
+    }
+
+    .poster {
+      background: black;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Movie Review</h1>
+  <a href="/login">Login Here</a>
+  <a href="/register">Register Here</a>
+  <div class="container">
+    <% out.forEach((movie) => { %>
+    <div class="poster"><%= movie.poster %></div>
+    <div>
+      <p><%= movie.name %></p>
+      <p><%= movie.description %></p>
+    </div>
+    <div>
+      <td><a href="/movie/<%= movie.id %>">View Detail</a></td>
+    </div>
+    <% }) %>
+  </div>
+</body>
+
+</html>
