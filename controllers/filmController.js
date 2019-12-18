@@ -6,6 +6,16 @@ const UserLikesFilm = require('../models').UserLikesFilm;
 const View = require('../views/view');
 
 class FilmController {
+
+  static openHomePage(req, res) {
+    FilmController.showAllFilms(res);
+  }
+
+  static openMovieDetailPage(req, res) {
+    const filmId = req.params.id;
+    FilmController.showOneFilm(filmId, res);
+  }
+
   /**
    * Contoh output:
    * {
@@ -41,15 +51,15 @@ class FilmController {
    * {
    *    id: 2,
    *    name: 'Skyfall',
-   *    psoter: null,
+   *    poster: null,
    *    description: 'lorem ipsum'
    *    trailer: 'www.loremipsum.com'
-   *    stats: { totalLikes: 1, totalDislikes 1, totalUserReacted: 2 }
+   *    stats: { totalLikes: 1, totalDislikes 1, totalUsersReacted: 2 }
    * }
    * 
    * @param {integer} filmId
    */
-  static showOneFilm(filmId) {
+  static showOneFilm(filmId, res) {
     const out = {};
 
     // cari film berdasarkan film ID
@@ -70,11 +80,14 @@ class FilmController {
 
         // terminal view
         View.success(out);
+
+        // browser view
+        res.render('movie-detail', { out });
       })
       .catch((err) => View.error(err));
   }
 
-  static showAllFilms() {
+  static showAllFilms(res) {
     const out = [];
 
     // cari semua film
@@ -92,6 +105,10 @@ class FilmController {
 
         // terminal view
         View.success(out);
+
+        // browser view
+        res.render('homepage', { out });
+        // res.send(out);
       })
       .catch((err) => View.error(err));
   }

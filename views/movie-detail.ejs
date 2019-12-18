@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%= out.name %></title>
+  <style>
+    body {
+      width: 720px;
+    }
+
+    .container {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 100px auto;
+    }
+
+    .poster {
+      background: black;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="/movie">back to home page</a>
+  <div class="container">
+    <div class="poster">
+      <%= out.poster %>
+    </div>
+    <div>
+      <h1><%= out.name %></h1>
+      <%= out.description %>
+      <p>Likes: <%= out.stats.totalLikes %></p>
+      <p>Dislikes: <%= out.stats.totalDislikes %></p>
+      <p>Total: <%= out.stats.totalUsersReacted %></p>
+      <form action="" method="post">
+        <input type="button" value="LIKE">
+        <input type="button" value="DISLIKE">
+      </form>
+      <iframe src="<%= out.trailer %>" frameborder="0"></iframe>
+    </div>
+  </div>
+</body>
+
+</html>
