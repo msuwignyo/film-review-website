@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= htmlAttr.title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h2><%= htmlAttr.title %></h2>
+        <form method="POST">
+            <div class="form-group">DataTypes.STRING
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" autocomplete="off"
+                    value="<%= htmlAttr.form.name %>">
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" autocomplete="off"
+                    value="<%= htmlAttr.form.username %>">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" autocomplete="off"
+                    value="<%= htmlAttr.form.email %>">
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    value="<%= htmlAttr.password %>">
+            </div>
+            <div class="form-group">
+                <label for="Role">Role</label>
+                <select class="form-control" name="role">
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary"><%= htmlAttr.form.button %></button>
+        </form>
+    </div>
+</body>
+
+</html>

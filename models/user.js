@@ -1,4 +1,5 @@
 'use strict';
+const hashPassword = require('../helper/hashPassword')
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
 
@@ -22,11 +23,44 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init({
     name: DataTypes.STRING,
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
+    username: {
+      type: DataTypes.STRING,
+      validate: {
+        isUnique(values) {
+          return User.findOne({ where: { username: values } })
+            .then(data => {
+              if (data) {
+                throw new Error('Email Has Already Registred')
+              }
+            })
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          msg: "Email Formated Wrong"
+        },
+        isUnique(values) {
+          return User.findOne({ where: { email: values } })
+            .then(data => {
+              if (data) {
+                throw new Error('Email Has Already Registred')
+              }
+            })
+        }
+      }
+    },
     password: DataTypes.STRING,
     role: DataTypes.STRING
-  }, { sequelize });
+  }, {
+    hooks: {
+      beforeCreate: (instance, option) => {
+        instance.password = hashPassword(instance.password)
+      }
+    }, sequelize
+  });
 
   User.associate = (models) => {
     User.belongsToMany(models.Film, { through: models.UserLikesFilm });

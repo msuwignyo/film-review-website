@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h2>List User</h2>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < data.length;i++){ %>
+                <tr>
+                    <th scope="row"><%= i+1 %></th>
+                    <td><%= data[i].name %></td>
+                    <td><%= data[i].username %></td>
+                    <td><%= data[i].email %></td>
+                    <td><%= data[i].role %></td>
+                    <td>
+                        <a class="btn btn-info" href="/admin/editUser/<%= data[i].dataValues.id %>">Edit</a>
+                        <a href="/admin/deleteUser/<%= data[i].dataValues.id %>"
+                            onclick="return confirm('Are You Sure Want to Delete?')" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                <%}%>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
