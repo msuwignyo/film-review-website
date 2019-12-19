@@ -5,31 +5,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Create New Account</title>
+  <title>Register</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/views/css/style.css">
+  <style>
+    body {
+      background: grey
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Create New Account</h1>
-
-  <form action="" method="post">
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name">
-    <br>
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username">
-    <br>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email">
-    <br>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password">
-
-    <input type="hidden" name="role" value="user" id="role">
-
-    <input type="submit" value="SUBMIT">
-
-    <p>Have an account? <a href="/login">Click here</a>!</p>
-  </form>
+  <header>
+    <%- include('partials/navbar') %>
+  </header>
+  <div class="container">
+    <h2 style="text-align: center; margin-top: 30px; color: white;">Register New Account</h2>
+    <div class="card card-login mb-5">
+      <div class="card-body">
+        <form method="POST">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" autocomplete="off"
+              placeholder="Insert Your Full Name">
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" autocomplete="off"
+              placeholder="Insert Username">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" autocomplete="off"
+              placeholder="ex: yourmail@mail.com">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" autocomplete="off">
+          </div>
+          <input type="hidden" name="role" value="user">
+          <button type="submit" style="width: 100%;" class="btn btn-primary mb-4">Login</button>
+        </form>
+        <center>
+          <small>
+            <p>Have an Account? <a href="/login">Click here!</a></p>
+          </small>
+        </center>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

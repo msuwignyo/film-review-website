@@ -6,44 +6,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><%= out.name %></title>
-  <style>
-    body {
-      width: 720px;
-    }
-
-    .container {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: 100px auto;
-    }
-
-    .poster {
-      background: black;
-    }
-  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/views/css/style.css">
 </head>
 
 <body>
-  <a href="/movie">back to home page</a>
+  <%- include('partials/navbar') %>
   <div class="container">
-    <div class="poster">
-      <%= out.poster %>
-    </div>
-    <div>
-      <h1><%= out.name %></h1>
-      <%= out.description %>
-      <p>Likes: <%= out.stats.totalLikes %></p>
-      <p>Dislikes: <%= out.stats.totalDislikes %></p>
-      <p>Total: <%= out.stats.totalUsersReacted %></p>
-
-      <% if (session.UserId !== undefined) { %>
-      <a href="/movie/like/<%= out.id %>">LIKE</a>
-      <a href="/movie/dislike/<%= out.id %>">DISLIKE</a>
-      <% } %>
-
-      <iframe src="<%= out.trailer %>" frameborder="0"></iframe>
+    <div class="card mt-5">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <img class="poster-big" src="../uploads/<%= out.poster %>">
+            <center>
+              <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#trailer">
+                View Trailer
+              </button>
+            </center>
+            <p align="center">Total Likes: <%= out.stats.totalLikes %></p>
+            <p align="center">Total Dislikes: <%= out.stats.totalDislikes %></p>
+            <p align="center">Total Voters: <%= out.stats.totalUsersReacted %></p>
+          </div>
+          <div class="col-sm-7">
+            <h3><%= out.name %></h3>
+            <p class="desc"><%= out.description %></p>
+            <% if (session.UserId !== undefined) { %>
+            <a class="btn btn-info" href="/movie/like/<%= out.id %>">LIKE</a>
+            <a class="btn btn-danger" href="/movie/dislike/<%= out.id %>">DISLIKE</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="modal fade" id="trailer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="trailer"><%= out.name %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 300px;">
+          <iframe width="100%" height="100%" src="<%= out.trailer %>" frameborder="0"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

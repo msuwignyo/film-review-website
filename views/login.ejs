@@ -5,23 +5,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login Page</title>
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/views/css/style.css">
+  <style>
+    body {
+      background: grey
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Login</h1>
-
-  <form action="" method="post">
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username">
-    <br>
-    <label for="password">Password</label>
-    <input type="text" name="password" id="password">
-    <br>
-    <input type="submit" value="LOGIN">
-
-    <p>Don't Have Account? <a href="/register">Click here</a>!</p>
-  </form>
+  <header>
+    <%- include('partials/navbar') %>
+  </header>
+  <div class="container">
+    <h2 style="text-align: center; margin-top: 30px; color: white;">Movie Review Login</h2>
+    <div class="card card-login">
+      <div class="card-body">
+        <form method="POST">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" autocomplete="off">
+          </div>
+          <button type="submit" style="width: 100%;" class="btn btn-primary mb-4">Login</button>
+        </form>
+        <center>
+          <small>
+            <p>Don't Have Account? <a href="/register">Click here!</a></p>
+          </small>
+        </center>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

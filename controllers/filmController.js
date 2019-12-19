@@ -58,7 +58,9 @@ class FilmController {
    */
   static addFilm(req, res) {
     const out = {};
+    req.body.poster = req.file.filename
     const nextFilm = req.body
+    // res.send(req.file.filename)
     // masukkin film ke dalam database
     Film.create(nextFilm)
       .then((newFilm) => {
@@ -140,7 +142,7 @@ class FilmController {
         View.success(out);
 
         // browser view
-        res.render('admin/listMovie', { out });
+        res.render('admin/listMovie', { out, session: req.session });
         // res.send(out);
       })
       .catch((err) => View.error(err));
@@ -193,6 +195,17 @@ class FilmController {
         View.success(out);
       })
   }
+  static updateMov(req, res) {
+    // console.log(req.body)
+    // console.log(req.session)
+    Film.update(req.body, { where: { id: req.params.id } })
+      .then(success => {
+        res.redirect('/admin/listMovie')
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
   static generateFormAdd(req, res) {
     let htmlAttr = {
       title: "Add Movie",
@@ -204,7 +217,7 @@ class FilmController {
         button: "Add Movie"
       }
     }
-    res.render('admin/formMovie', { htmlAttr })
+    res.render('admin/formMovie', { htmlAttr, session: req.session })
   }
   static generateFormEdit(req, res) {
     Film.findOne({ where: req.params })
@@ -219,7 +232,7 @@ class FilmController {
             button: "Edit Movie"
           }
         }
-        res.render('admin/formMovie', { htmlAttr })
+        res.render('admin/formMovie', { htmlAttr, session: req.session })
       })
   }
 

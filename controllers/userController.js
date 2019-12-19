@@ -1,6 +1,7 @@
 const Models = require('../models').User
 const UserLikeFilms = require('../models').UserLikesFilm
 const viewJs = require('../views/view')
+const hasPassword = require('../helper/hashPassword')
 class UserController {
     static userLike(req, res) {
 
@@ -18,7 +19,7 @@ class UserController {
                 button: "Add User"
             }
         }
-        res.render('admin/formUser', { htmlAttr })
+        res.render('admin/formUser', { htmlAttr, session: req.session })
     }
     static findAllUser(req, res) {
         Models.findAll({ order: [["id", "asc"]] })
@@ -45,7 +46,7 @@ class UserController {
                         button: "Edit User"
                     }
                 }
-                res.render('admin/formUser', { htmlAttr })
+                res.render('admin/formUser', { htmlAttr, session: req.session })
             })
     }
     static Edit(req, res) {
@@ -75,6 +76,7 @@ class UserController {
             })
     }
     static create(req, res) {
+
         Models.create({
             name: req.body.name,
             username: req.body.username,
@@ -107,10 +109,12 @@ class UserController {
     }
 
     static findUser(req, res) {
+        req.body.password = hasPassword(req.body.password)
         Models.findOne({ where: req.body })
             .then((user) => {
                 req.session.UserId = user.id;
                 req.session.role = user.role;
+                req.session.name = user.name;
 
                 res.redirect('/')
 
@@ -126,9 +130,10 @@ class UserController {
     }
 
     static findAdmin(req, res) {
+        req.body.password = hasPassword(req.body.password)
+        // console.log(req.body)
         Models.findOne({ where: req.body })
             .then((user) => {
-
                 // res.send(user.role);
                 if (user.role == 'admin') {
                     req.session.UserId = user.id;
