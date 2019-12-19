@@ -1,4 +1,3 @@
-// TODO: Bayu
 const Models = require('../models').User
 
 class UserController {
@@ -76,6 +75,22 @@ class UserController {
             .catch(err => {
                 res.sed(err)
             })
+    }
+
+    static findAdmin(req, res) {
+        Models.findOne({ where: req.body })
+            .then((user) => {
+
+                // res.send(user.role);
+                if (user.role == 'admin') {
+                    req.session.UserId = user.id;
+                    // res.send(req.session);
+                    res.redirect('/admin/listUser');
+                } else {
+                    res.redirect('/admin');
+                }
+            })
+            .catch((err) => res.send(`Error: ${err}`));
     }
 }
 
