@@ -1,6 +1,6 @@
 // TODO: Bayu
 const Models = require('../models').User
-const viewJs = require('../views/view')
+
 class UserController {
     static formAddUser(req, res) {
         let htmlAttr = {
@@ -20,13 +20,13 @@ class UserController {
         Models.findAll()
             .then(dataUser => {
                 // console.log(dataUser)
-                viewJs.findAll(dataUser)
+
                 res.render('admin/listUser', { data: dataUser })
                 // res.send(dataUser)
             })
             .catch(err => {
                 res.send(err)
-                viewJs.error(err)
+
             })
     }
     static formEditUser(req, res) {
@@ -43,7 +43,7 @@ class UserController {
                         button: "Edit User"
                     }
                 }
-                viewJs.findONe(data.dataValues)
+
                 res.render('admin/formUser', { htmlAttr })
             })
     }
@@ -57,21 +57,21 @@ class UserController {
         })
             .then(success => {
                 res.redirect('/admin/listUser')
-                viewJs.success(req.body.username)
+
             })
             .catch(err => {
                 res.send(err)
-                viewJs.error(err)
+
             })
     }
     static deleteUser(req, res) {
         Models.destroy({ where: req.params })
             .then(success => {
                 res.redirect('/admin/listUser')
-                viewJs.delete(req.params.id)
+
             })
             .catch(err => {
-                viewJs.error(err)
+
                 res.sed(err)
             })
     }
