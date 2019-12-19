@@ -1,5 +1,10 @@
 const Models = require('../models').User
+<<<<<<< HEAD
 
+=======
+const UserLikeFilms = require('../models').UserLikesFilm
+const viewJs = require('../views/view')
+>>>>>>> 58b9cb016b8f30388064b6257e544aff551e616c
 class UserController {
     static formAddUser(req, res) {
         let htmlAttr = {
@@ -44,7 +49,8 @@ class UserController {
             })
     }
     static Edit(req, res) {
-        Models.update(req.params, { where: req.params })
+        req.body.id = Number(req.params.id)
+        Models.update(req.body, { where: req.params })
             .then(success => {
                 res.redirect('/admin/listUser')
             })
@@ -68,13 +74,20 @@ class UserController {
             })
     }
     static deleteUser(req, res) {
-        Models.destroy({ where: req.params })
-            .then(success => {
+        UserLikeFilms.destroy({ where: { UserId: req.params.id } })
+            .then(() => {
+
+                // baru hapus film-nya
+                return Models.destroy({ where: req.params })
+            })
+            .then(() => {
+
+                // terminal view
+                // View.success('Delete operation done...')
+                //browser
                 res.redirect('/admin/listUser')
             })
-            .catch(err => {
-                res.sed(err)
-            })
+            .catch((err) => View.error(err));
     }
 
     static findAdmin(req, res) {

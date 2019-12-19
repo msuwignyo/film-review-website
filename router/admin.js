@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Controller = require('../controllers').UserController
+const ControllerMovie = require('../controllers').FilmController
 
 // middleware that is specific to this router
 // function timeLog(req, res, next) {
@@ -27,11 +28,16 @@ function checkAdmin(req, res, next) {
 // res.render('admin')
 router.get('/', (req, res) => { res.render('admin') });
 router.post('/', Controller.findAdmin);
-// router.get('/addUser', checkAdmin, Controller.formAddUser)
-// router.post('/addUser', checkAdmin, Controller.create)
-// router.get('/editUser/:id', checkAdmin, Controller.formEditUser)
-// router.post('/editUser/:id', checkAdmin, Controller.Edit)
+router.get('/addUser', checkAdmin, Controller.formAddUser)
+router.post('/addUser', checkAdmin, Controller.create)
+router.get('/editUser/:id', checkAdmin, Controller.formEditUser)
+router.post('/editUser/:id', checkAdmin, Controller.Edit)
 router.get('/listUser', checkAdmin, Controller.findAllUser)
-// router.get('/deleteUser/:id', checkAdmin, Controller.deleteUser)
+router.get('/deleteUser/:id', checkAdmin, Controller.deleteUser)
+router.get('/addMovie', ControllerMovie.generateFormAdd)
+router.post('/addMovie', ControllerMovie.addFilm)
+router.get('/editMovie/:id', ControllerMovie.generateFormEdit)
+router.get('/listMovie', ControllerMovie.showAllFilmsAdmin)
+router.get('/deleteMovie/:id', ControllerMovie.deleteFilm)
 
 module.exports = router
