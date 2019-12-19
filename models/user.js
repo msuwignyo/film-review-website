@@ -26,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       validate: {
-        isUnique(values) {
+        usernameUnique(values) {
           return User.findOne({ where: { username: values } })
             .then(data => {
               if (data) {
-                throw new Error('Email Has Already Registred')
+                throw new Error('Username Has Already Registred')
               }
             })
         }
