@@ -6,41 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Movie Review</title>
-  <!-- <link rel="stylesheet" href="./css/homepage.css"> -->
-  <style>
-    body {
-      width: 720px
-    }
-
-    .container {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: 100px auto 100px;
-    }
-
-    .poster {
-      background: black;
-    }
-  </style>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/views/css/style.css">
 </head>
 
 <body>
-  <h1>Movie Review</h1>
-  <% if (session.UserId === undefined) { %>
-  <a href="/login">Login Here</a>
-  <a href="/register">Register Here</a>
-  <% } else { %>
-  <a href="/logout">Log Out</a>
-  <% } %>
+  <%- include('partials/navbar') %>
   <div class="container">
+    <h2 class="title" align="center">Movie List</h2>
     <% out.forEach((movie) => { %>
-    <div class="poster"><%= movie.poster %></div>
-    <div>
-      <p><%= movie.name %></p>
-      <p><%= movie.description %></p>
-    </div>
-    <div>
-      <td><a href="/movie/<%= movie.id %>">View Detail</a></td>
+    <div class="card list-movie">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <img class="poster" src="../uploads/<%= movie.poster %>">
+          </div>
+          <div class="col-sm-6 flx-center">
+            <div class="wrapper">
+              <h4><%= movie.name %></h4>
+              <p><%= movie.description %></p>
+            </div>
+          </div>
+          <div class="col-sm-2 flx-center">
+            <a href="/movie/<%= movie.id %>" class="btn btn-success">View Detail</a>
+          </div>
+        </div>
+      </div>
     </div>
     <% }) %>
   </div>

@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Controller = require('../controllers').UserController
 const ControllerMovie = require('../controllers').FilmController
+const multer = require('multer')
+const upload = multer({
+    dest: 'uploads/'
+})
 
 function checkAdmin(req, res, next) {
     if (req.session.UserId === undefined && req.session.role !== 'admin') {
@@ -21,14 +25,15 @@ router.post('/editUser/:id', checkAdmin, Controller.Edit)
 router.get('/listUser', checkAdmin, Controller.findAllUser)
 router.get('/deleteUser/:id', checkAdmin, Controller.deleteUser)
 router.get('/addMovie', checkAdmin, ControllerMovie.generateFormAdd)
-router.post('/addMovie', checkAdmin, ControllerMovie.addFilm)
+router.post('/addMovie', checkAdmin, upload.single('poster'), ControllerMovie.addFilm)
 router.get('/editMovie/:id', checkAdmin, ControllerMovie.generateFormEdit)
-router.post('/editMovie/:id', checkAdmin, ControllerMovie.updateFilm)
+router.post('/editMovie/:id', checkAdmin, upload.single('poster'), ControllerMovie.updateMov)
 router.get('/listMovie', checkAdmin, ControllerMovie.showAllFilmsAdmin)
 router.get('/deleteMovie/:id', checkAdmin, ControllerMovie.deleteFilm)
 router.get('/logout', (req, res) => {
-  req.session.destroy();
-  res.redirect('/admin');
+    req.session.destroy();
+    res.redirect('/admin');
 })
+
 
 module.exports = router

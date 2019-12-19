@@ -11,3 +11,35 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.title{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.nav-link{
+    color: white!Important;
+}
+.form-admin{
+    width:50%;
+    margin-bottom: 30px;
+}
+.list-movie{
+    margin-top: 20px;
+}
+.poster{
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.flx-center{
+    display: flex;
+    align-items: center;
+}
+.poster-big{
+    height: 350px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+}

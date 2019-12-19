@@ -10,7 +10,7 @@ const Controller = require('../controllers').UserController;
 //   }
 // }
 
-router.get('/', (req, res) => res.render('login'));
+router.get('/', (req, res) => res.render('login', { session: req.session }));
 
 router.post('/', Controller.findUser);
 

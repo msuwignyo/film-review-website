@@ -10,6 +10,7 @@ const Admin = require('./router').Admin
 
 // ejs setup
 app.set('view engine', 'ejs');
+app.use(express.static('./'))
 app.use(express.urlencoded({ extended: true }));
 
 // set session
