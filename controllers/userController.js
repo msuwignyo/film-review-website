@@ -1,5 +1,6 @@
 // TODO: Bayu
 const Models = require('../models').User
+const UserLikeFilms = require('../models').UserLikesFilm
 const viewJs = require('../views/view')
 class UserController {
     static formAddUser(req, res) {
@@ -45,7 +46,8 @@ class UserController {
             })
     }
     static Edit(req, res) {
-        Models.update(req.params, { where: req.params })
+        req.body.id = Number(req.params.id)
+        Models.update(req.body, { where: req.params })
             .then(success => {
                 res.redirect('/admin/listUser')
             })
@@ -69,13 +71,20 @@ class UserController {
             })
     }
     static deleteUser(req, res) {
-        Models.destroy({ where: req.params })
-            .then(success => {
+        UserLikeFilms.destroy({ where: { UserId: req.params.id } })
+            .then(() => {
+
+                // baru hapus film-nya
+                return Models.destroy({ where: req.params })
+            })
+            .then(() => {
+
+                // terminal view
+                // View.success('Delete operation done...')
+                //browser
                 res.redirect('/admin/listUser')
             })
-            .catch(err => {
-                res.sed(err)
-            })
+            .catch((err) => View.error(err));
     }
 }
 

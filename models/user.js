@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         usernameUnique(values) {
           return User.findOne({ where: { username: values } })
             .then(data => {
-              if (data) {
+              if (data && data.id !== this.id) {
                 throw new Error('Username Has Already Registred')
               }
             })
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         isUnique(values) {
           return User.findOne({ where: { email: values } })
             .then(data => {
-              if (data) {
+              if (data && data.id !== this.id) {
                 throw new Error('Email Has Already Registred')
               }
             })
