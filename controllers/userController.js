@@ -1,10 +1,6 @@
 const Models = require('../models').User
-<<<<<<< HEAD
-
-=======
 const UserLikeFilms = require('../models').UserLikesFilm
 const viewJs = require('../views/view')
->>>>>>> 58b9cb016b8f30388064b6257e544aff551e616c
 class UserController {
     static formAddUser(req, res) {
         let htmlAttr = {

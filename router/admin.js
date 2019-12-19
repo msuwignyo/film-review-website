@@ -37,6 +37,7 @@ router.get('/deleteUser/:id', checkAdmin, Controller.deleteUser)
 router.get('/addMovie', ControllerMovie.generateFormAdd)
 router.post('/addMovie', ControllerMovie.addFilm)
 router.get('/editMovie/:id', ControllerMovie.generateFormEdit)
+router.post('/editMovie/:id', ControllerMovie.updateFilm)
 router.get('/listMovie', ControllerMovie.showAllFilmsAdmin)
 router.get('/deleteMovie/:id', ControllerMovie.deleteFilm)
 
