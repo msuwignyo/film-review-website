@@ -17,16 +17,14 @@ class UserController {
         res.render('admin/formUser', { htmlAttr })
     }
     static findAllUser(req, res) {
-        Models.findAll()
+        Models.findAll({ order: [["id", "asc"]] })
             .then(dataUser => {
                 // console.log(dataUser)
-
                 res.render('admin/listUser', { data: dataUser })
                 // res.send(dataUser)
             })
             .catch(err => {
                 res.send(err)
-
             })
     }
     static formEditUser(req, res) {
@@ -43,8 +41,16 @@ class UserController {
                         button: "Edit User"
                     }
                 }
-
                 res.render('admin/formUser', { htmlAttr })
+            })
+    }
+    static Edit(req, res) {
+        Models.update(req.params, { where: req.params })
+            .then(success => {
+                res.redirect('/admin/listUser')
+            })
+            .catch(err => {
+                res.send(err)
             })
     }
     static create(req, res) {
@@ -57,21 +63,17 @@ class UserController {
         })
             .then(success => {
                 res.redirect('/admin/listUser')
-
             })
             .catch(err => {
                 res.send(err)
-
             })
     }
     static deleteUser(req, res) {
         Models.destroy({ where: req.params })
             .then(success => {
                 res.redirect('/admin/listUser')
-
             })
             .catch(err => {
-
                 res.sed(err)
             })
     }
