@@ -2,6 +2,10 @@ const Models = require('../models').User
 const UserLikeFilms = require('../models').UserLikesFilm
 const viewJs = require('../views/view')
 class UserController {
+    static userLike(req, res) {
+
+    }
+
     static formAddUser(req, res) {
         let htmlAttr = {
             title: "Add User",
