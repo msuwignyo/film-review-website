@@ -2,6 +2,10 @@ const Models = require('../models').User
 const UserLikeFilms = require('../models').UserLikesFilm
 const viewJs = require('../views/view')
 class UserController {
+    static userLike(req, res) {
+
+    }
+
     static formAddUser(req, res) {
         let htmlAttr = {
             title: "Add User",
@@ -54,6 +58,22 @@ class UserController {
                 res.send(err)
             })
     }
+    static createUser(req, res) {
+        Models.create({
+            name: req.body.name,
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            role: req.body.role
+        })
+            .then(success => {
+
+                res.redirect('/')
+            })
+            .catch(err => {
+                res.send(err)
+            })
+    }
     static create(req, res) {
         Models.create({
             name: req.body.name,
@@ -86,6 +106,25 @@ class UserController {
             .catch((err) => View.error(err));
     }
 
+    static findUser(req, res) {
+        Models.findOne({ where: req.body })
+            .then((user) => {
+                req.session.UserId = user.id;
+                req.session.role = user.role;
+
+                res.redirect('/')
+
+                // res.send(user.role);
+                // if (user.role == 'admin') {
+                //     // res.send(req.session);
+                //     res.redirect('/admin/listUser');
+                // } else {
+                //     res.redirect('/admin');
+                // }
+            })
+            .catch((err) => res.send(`Error: ${err}`));
+    }
+
     static findAdmin(req, res) {
         Models.findOne({ where: req.body })
             .then((user) => {
@@ -93,6 +132,7 @@ class UserController {
                 // res.send(user.role);
                 if (user.role == 'admin') {
                     req.session.UserId = user.id;
+                    req.session.role = user.role;
                     // res.send(req.session);
                     res.redirect('/admin/listUser');
                 } else {

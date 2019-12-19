@@ -26,8 +26,11 @@
 
 <body>
   <h1>Movie Review</h1>
+  <% if (session.UserId === undefined) { %>
   <a href="/login">Login Here</a>
   <a href="/register">Register Here</a>
+  <% } %>
+
   <div class="container">
     <% out.forEach((movie) => { %>
     <div class="poster"><%= movie.poster %></div>

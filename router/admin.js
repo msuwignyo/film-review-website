@@ -16,6 +16,7 @@ const ControllerMovie = require('../controllers').FilmController
 // }
 
 function checkAdmin(req, res, next) {
+<<<<<<< HEAD
     // res.send(req.session)
     // console.log(req.session.id);
     if (req.session.UserId === undefined) {
@@ -23,6 +24,13 @@ function checkAdmin(req, res, next) {
     } else {
         next();
     }
+=======
+  if (req.session.UserId === undefined && req.session.role !== 'admin') {
+    res.redirect('/admin');
+  } else {
+    next();
+  }
+>>>>>>> master
 }
 
 // res.render('admin')
