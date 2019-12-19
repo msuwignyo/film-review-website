@@ -16,9 +16,7 @@ const ControllerMovie = require('../controllers').FilmController
 // }
 
 function checkAdmin(req, res, next) {
-  // res.send(req.session)
-  // console.log(req.session.id);
-  if (req.session.UserId === undefined) {
+  if (req.session.UserId === undefined && req.session.role !== 'admin') {
     res.redirect('/admin');
   } else {
     next();
@@ -34,11 +32,11 @@ router.get('/editUser/:id', checkAdmin, Controller.formEditUser)
 router.post('/editUser/:id', checkAdmin, Controller.Edit)
 router.get('/listUser', checkAdmin, Controller.findAllUser)
 router.get('/deleteUser/:id', checkAdmin, Controller.deleteUser)
-router.get('/addMovie', ControllerMovie.generateFormAdd)
-router.post('/addMovie', ControllerMovie.addFilm)
-router.get('/editMovie/:id', ControllerMovie.generateFormEdit)
-router.post('/editMovie/:id', ControllerMovie.updateFilm)
-router.get('/listMovie', ControllerMovie.showAllFilmsAdmin)
-router.get('/deleteMovie/:id', ControllerMovie.deleteFilm)
+router.get('/addMovie', checkAdmin, ControllerMovie.generateFormAdd)
+router.post('/addMovie', checkAdmin, ControllerMovie.addFilm)
+router.get('/editMovie/:id', checkAdmin, ControllerMovie.generateFormEdit)
+router.post('/editMovie/:id', checkAdmin, ControllerMovie.updateFilm)
+router.get('/listMovie', checkAdmin, ControllerMovie.showAllFilmsAdmin)
+router.get('/deleteMovie/:id', checkAdmin, ControllerMovie.deleteFilm)
 
 module.exports = router

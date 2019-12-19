@@ -8,7 +8,7 @@ const View = require('../views/view');
 class FilmController {
 
   static openHomePage(req, res) {
-    FilmController.showAllFilms(res);
+    FilmController.showAllFilms(req, res);
   }
 
   static openMovieDetailPage(req, res) {
@@ -116,7 +116,7 @@ class FilmController {
       .catch((err) => View.error(err));
   }
 
-  static showAllFilms(res) {
+  static showAllFilms(req, res) {
     const out = [];
 
     // cari semua film
@@ -136,8 +136,8 @@ class FilmController {
         View.success(out);
 
         // browser view
-        res.render('homepage', { out });
-        // res.send(out);
+        res.render('homepage', { out, session: req.session });
+        // res.send(req.session);
       })
       .catch((err) => View.error(err));
   }
