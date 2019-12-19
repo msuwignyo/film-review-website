@@ -5,7 +5,7 @@ const { movieRoute, loginRoute, registerRoute } = require('./router');
 const express = require('express');
 const session = require('express-session'); // [1]
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || "development";
 const Admin = require('./router').Admin
 
 // ejs setup
