@@ -29,8 +29,9 @@
   <% if (session.UserId === undefined) { %>
   <a href="/login">Login Here</a>
   <a href="/register">Register Here</a>
+  <% } else { %>
+  <a href="/logout">Log Out</a>
   <% } %>
-
   <div class="container">
     <% out.forEach((movie) => { %>
     <div class="poster"><%= movie.poster %></div>

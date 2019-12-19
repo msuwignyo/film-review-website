@@ -41,6 +41,9 @@
                 <%}%>
             </tbody>
         </table>
+        <% if (session.UserId !== undefined) { %>
+                <a href="/admin/logout">Log Out</a>
+                <% } %>
     </div>
 </body>
 

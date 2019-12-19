@@ -5,15 +5,43 @@ const User = require('../models').User;
 const UserLikesFilm = require('../models').UserLikesFilm;
 const View = require('../views/view');
 
+
 class FilmController {
+  static logout(req, res) {
+    // req.session.destroy();
+    res.send('fuck');
+  }
+
+  static userLikeFilm(req, res) {
+    // console.log(req.session.UserId);
+    UserLikesFilm
+      .create({
+        UserId: req.session.UserId,
+        FilmId: req.params.id,
+        status: true
+      })
+      .then(() => res.redirect(`/movie/${req.params.id}`))
+      .catch((err) => res.send(err));
+  }
+
+  static userDislikeFilm(req, res) {
+    UserLikesFilm
+      .create({
+        UserId: req.session.UserId,
+        FilmId: req.params.id,
+        status: false
+      })
+      .then(() => res.redirect(`/movie/${req.params.id}`))
+      .catch((err) => res.send(err));
+  }
 
   static openHomePage(req, res) {
     FilmController.showAllFilms(req, res);
   }
 
   static openMovieDetailPage(req, res) {
-    const filmId = req.params.id;
-    FilmController.showOneFilm(filmId, res);
+    // const filmId = req.params.id;
+    FilmController.showOneFilm(req, res);
   }
 
   /**
@@ -62,9 +90,10 @@ class FilmController {
    * @param {integer} filmId
    */
 
-  static showOneFilm(filmId, res) {
+  static showOneFilm(req, res) {
     const out = {};
 
+    const filmId = req.params.id
     // cari film berdasarkan film ID
     Film.findByPk(filmId, { include: [User] })
       .then((film) => {
@@ -76,7 +105,7 @@ class FilmController {
         out.trailer = film.trailer;
 
         // cari data statistik-nya:
-        return UserLikesFilm.filmStatistics(filAddmId);
+        return UserLikesFilm.filmStatistics(filmId);
       })
       .then((stats) => {
         out.stats = stats;
@@ -85,7 +114,8 @@ class FilmController {
         View.success(out);
 
         // browser view
-        res.render('movie-detail', { out });
+        // res.send(req.session);
+        res.render('movie-detail', { out, session: req.session });
       })
       .catch((err) => View.error(err));
   }

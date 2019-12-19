@@ -24,7 +24,7 @@ class UserController {
         Models.findAll({ order: [["id", "asc"]] })
             .then(dataUser => {
                 // console.log(dataUser)
-                res.render('admin/listUser', { data: dataUser })
+                res.render('admin/listUser', { data: dataUser, session: req.session })
                 // res.send(dataUser)
             })
             .catch(err => {
