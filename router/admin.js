@@ -3,18 +3,6 @@ const router = express.Router()
 const Controller = require('../controllers').UserController
 const ControllerMovie = require('../controllers').FilmController
 
-// middleware that is specific to this router
-// function timeLog(req, res, next) {
-//   console.log(`=======================================`);
-//   console.log(`Middleware Admin`);
-//   if (req.session.currUserId === undefined) {
-//     next();
-//   } else {
-//     req.session.currUserId = req.body.id;
-//   }
-//   console.log(`=======================================`);
-// }
-
 function checkAdmin(req, res, next) {
     if (req.session.UserId === undefined && req.session.role !== 'admin') {
         res.redirect('/admin');
@@ -38,5 +26,9 @@ router.get('/editMovie/:id', checkAdmin, ControllerMovie.generateFormEdit)
 router.post('/editMovie/:id', checkAdmin, ControllerMovie.updateFilm)
 router.get('/listMovie', checkAdmin, ControllerMovie.showAllFilmsAdmin)
 router.get('/deleteMovie/:id', checkAdmin, ControllerMovie.deleteFilm)
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/admin');
+})
 
 module.exports = router

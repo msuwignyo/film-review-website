@@ -24,6 +24,10 @@ app.get('/', (req, res) => res.redirect('/movie'));
 // routes to different pages
 app.use('/movie', movieRoute);
 app.use('/login', loginRoute);
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
+});
 app.use('/register', registerRoute);
 app.use('/admin', Admin)
 
