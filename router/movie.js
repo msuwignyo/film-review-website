@@ -8,4 +8,8 @@ router.get('/', FilmController.openHomePage);
 // show one movie in details
 router.get('/:id', FilmController.openMovieDetailPage);
 
+router.get('/like/:id', FilmController.userLikeFilm);
+
+router.get('/dislike/:id', FilmController.userDislikeFilm);
+
 module.exports = router;

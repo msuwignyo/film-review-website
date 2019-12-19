@@ -35,10 +35,12 @@
       <p>Likes: <%= out.stats.totalLikes %></p>
       <p>Dislikes: <%= out.stats.totalDislikes %></p>
       <p>Total: <%= out.stats.totalUsersReacted %></p>
-      <form action="" method="post">
-        <input type="button" value="LIKE">
-        <input type="button" value="DISLIKE">
-      </form>
+
+      <% if (session.UserId !== undefined) { %>
+      <a href="/movie/like/<%= out.id %>">LIKE</a>
+      <a href="/movie/dislike/<%= out.id %>">DISLIKE</a>
+      <% } %>
+
       <iframe src="<%= out.trailer %>" frameborder="0"></iframe>
     </div>
   </div>

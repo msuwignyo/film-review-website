@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
         // cari semua user yg dislike film tersebut
         return UserLikesFilm.findAll({
-          where: { FilmId: filmId, status: true }
+          where: { FilmId: filmId, status: false }
         })
       }).then((userDislikes) => {
         out.totalDislikes = userDislikes.length;
