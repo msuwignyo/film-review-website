@@ -3,13 +3,20 @@ const { movieRoute, loginRoute, registerRoute } = require('./router');
 
 // server setup
 const express = require('express');
+const session = require('express-session'); // [1]
 const app = express();
-const port = 3003;
+const port = 3010;
 const Admin = require('./router').Admin
 
 // ejs setup
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
+
+// set session
+// app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat'
+}))
 
 // home page
 app.get('/', (req, res) => res.redirect('/movie'));

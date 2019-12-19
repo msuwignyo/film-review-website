@@ -9,6 +9,8 @@ Ini adalah pair-project saya dengan Bayu Oktari dengan judul "Film Review Websit
 
 ## Tugas 18 Desember 2019
 
-- [x] @m4rk00s seed user data
+- [x] @m4rk00s seed user data & film
 - [x] @m4rk00s buat FilmController
-- [ ] @bayuoktari buat admin control (UserController)
+- [x] @m4rk00s buat view homepage, register, login
+- [x] @bayuoktari buat UserController
+- [x] @bayuoktari buat view admin -> register, login, list
