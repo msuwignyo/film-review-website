@@ -7,10 +7,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "film-review",
-    "host": "127.0.0.1",
+    "username": "dzuwrtpszujkve",
+    "password": "fd606457e9781b383dcc0b081ff32da3b77e917555fc5401dc61cc85a7a387a0",
+    "database": "d8k0smqh4735bl",
+    "host": "ec2-54-235-250-38.compute-1.amazonaws.com",
+    "port": 5432,
     "dialect": "postgres"
   }
 }
