@@ -5,5 +5,12 @@
     "database": "film-review",
     "host": "127.0.0.1",
     "dialect": "postgres"
-  }
+  },
+  "production": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "film-review",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
 }
